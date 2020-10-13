@@ -7,7 +7,6 @@ var fs = require("fs"); //File System 모듈, 파일을 읽거나 쓸 수 있는
 //데이터베이스 유저정보
 
 
-
 //서버객체 생성
 //서버는 클라이언트의 요청이 들어오면, 반드시 응답을 해야 한다..
 //http 매카니즘이다. 만약 응답을 안하면 클라이언트는 무한정 서버의 응답을 기다리므로
@@ -29,6 +28,7 @@ var server = http.createServer(function(request,response){
     // var tag = "<input type=\"text\">";
     // tag = tag+"<button>가입</button>";
     
+ 
     
     //서버에 있는 파일을 읽어들여, 클라이언트에게 전송한다!!
     //★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
