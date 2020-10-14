@@ -46,7 +46,8 @@ var server = http.createServer(function(request,response){
         var sql = "insert into member2(uid,password,uname,phone,email,receive,addr,memo)";
         sql+=" values(?,?,?,?,?,?,?,?)"; //바인드 변수를 이용
 
-        con.query(sql,[param.uid,
+        con.query(sql,
+            [param.uid,
             param.password,
             param.uname,
             param.phone,
