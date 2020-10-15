@@ -51,7 +51,7 @@
 
             $("form").attr({
                 action:"/member/regist",
-                method:"get"
+                method:"post"
             })
            $("form").submit(); //서버에 전송
         });
@@ -111,12 +111,10 @@
         <tr>
             <td>보유기술</td>
             <td>
-               java<input type="checkbox" name="skill_id" value="1">
-               oracle<input type="checkbox" name="skill_id" value="2">
-               android<input type="checkbox" name="skill_id" value="3">
-               python<input type="checkbox" name="skill_id" value="4">
-               swift<input type="checkbox" name="skill_id" value="5">
-               R<input type="checkbox" name="skill_id" value="6">
+                <%for(var i=0;i<skillArray.length;i++){%>
+                    <%var skill = skillArray[i];%>
+                      <%=skill.name%><input type="checkbox" name="skill_id" value="<%=skill.skill_id%>">
+               <%}%>
             </td>
         </tr>
         <tr>
