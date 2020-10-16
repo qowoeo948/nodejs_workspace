@@ -37,6 +37,9 @@ var server = http.createServer(function(request, response){
         update(request, response);
     }else if(urlJson.pathname=="/category"){ //동물구분을 요청
         getCategory(request, response);
+    }else if(urlJson.pathname=="/animal"){ //소속된 동물을 요청하면...
+        getAnimal(request, response);
+
     }
     
 
@@ -212,28 +215,69 @@ function update(request, response){
     });
 }
 
-//동물의 종류 가져오기
+//동물의 종류 가져오기 
 function getCategory(request, response){
-    var sql = "select *from category";
-    con.query(sql,function(error,record,fields){
+    var sql="select * from category";
+
+    con.query(sql, function(error, record, fields){
         if(error){
-            console.log("동물구분 목록 가져오기 실패",error);
+            console.log("동물구분 목록 조회실패", error);
         }else{
-            fs.readFile("./zanimal.ejs","utf-8",function(error,data){
-                if(error){
-                    console.log("zanimal.ejs읽기 실패",error);
+            fs.readFile("./zanimal.ejs", "utf-8", function(err, data){
+                if(err){
+                    console.log("animal.ejs 읽기 실패", err);
                 }else{
-                 response.writeHead(200, {"Content-Type":"text/html;charset=utf-8"});
-                 response.end(ejs.render(data,{
-                     categoryArray:record
-                 }))
-                }
+                    response.writeHead(200, {"Content-Type":"text/html;charset=utf-8"});
+                    response.end(ejs.render(data,{
+                        categoryArray:record
+                    }));
+                }           
             });
         }
-
     });
 }
 
+//소속된 동물의 목록 가져오기
+function getAnimal(request, response){
+    //카테고리 가져오기 
+    var sql="select * from category";
+    con.query(sql, function(error, record, fields){
+        if(error){
+            console.log("동물구분 목록 조회실패", error);
+        }else{
+            var categoryRecord=record; //카테고리 목록 배열
+
+            category_id = urlJson.query.category_id;//get방식의 category_id 파라미터 받기!!
+            sql="select * from animal where category_id="+category_id;
+        
+            //mysql연동 
+            con.query(sql, function(error, record, fields){
+                if(error){
+                    console.log("동물목록 가져오기 실패", error);
+                }else{
+                    console.log("record : " , record);
+        
+                    fs.readFile("./zanimal.ejs","utf-8", function(err, data){
+                        if(err){
+                            console.log("animal.ejs읽기 실패", err);
+                        }else{
+                            response.writeHead(200, {"Content-Type":"text/html;charset=utf-8"});
+                            response.end(ejs.render(data, {
+                                animalArray:record, 
+                                categoryArray:categoryRecord
+                           
+                            }));
+                        }
+                    });
+        
+                }
+            });
+        }
+    });
+
+
+
+}
 //mysql 접속 
 function connect(){
     con=mysql.createConnection({
