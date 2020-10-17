@@ -39,6 +39,7 @@ tr:nth-child(even) {
     <th>No</th>
     <th>제목</th>
     <th>작성자</th>
+    <th>내용</th>
     <th>등록일</th>
     <th>조회수</th>
   </tr>
@@ -49,6 +50,7 @@ tr:nth-child(even) {
       <td><%=n%></td>
       <td><a href="/notice/detail?notice_id=<%=notice.notice_id%>"><%=notice.title%></a></td>
       <td><%=notice.writer%></td>
+      <td><%=notice.content%></td>
       <td><%=notice.regdate%></td>
       <td><%=notice.hit%></td>
     </tr>
