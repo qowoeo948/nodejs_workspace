@@ -48,7 +48,7 @@ wserver.on("connection",  function(socket){
     var json = JSON.parse(data);
     if(json.requestCode=="create"){ //글쓰기 요청이면..
       //가공할 작업 있으면 여기서 하기..
-      
+
     }else if(json.requestCode=="read"){
 
     }else if(json.requestCode=="update"){

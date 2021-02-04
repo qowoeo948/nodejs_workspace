@@ -118,7 +118,9 @@ router.put('/', function(request, response, next) {
       message.resultCode=200;
       message.data=result;
       message.msg="수정하기 성공";
-      response.end(JSON.stringify(message));
+      response.end(JSON.stringify(message));  //웹 요청에 대한 응답
+
+      broadCasting(message);  //웹소켓을 이용한 브로드캐스팅
     }
     con.end();//접속끊기
   });
@@ -144,7 +146,8 @@ router.delete('/:board_id', function(request, response, next) {
       message.data=result;
       message.msg="삭제하기 성공";
 
-      response.end(JSON.stringify(message));
+      response.end(JSON.stringify(message));  //웹요청 응답
+      broadCasting(message);  //웹소켓 브로드캐스팅
     }
     con.end();//접속끊기
   });

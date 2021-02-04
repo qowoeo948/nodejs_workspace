@@ -230,18 +230,6 @@
             }
         }
 
-        //서버에 메시지 전송하기
-        function send(){
-            var msg = document.querySelector("#t_input").value;
-            webSocket.send(msg);
-            document.querySelector("#t_input").value="";
-        }
-
-        function enter(){
-            if(event.keyCode == 13){
-                send();
-            }
-        }
     </script>
 </head>
 <body>
